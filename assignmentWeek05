@@ -1,0 +1,63 @@
+package Assignments;
+
+// Step 1: Create an interface named Logger
+interface Logger {
+    // Step 2: Add two void methods to the Logger interface, each should take a String as an argument
+    void log(String message);
+    void error(String errorMessage);
+}
+
+// Class implementing AsteriskLogger
+class AsteriskLogger implements Logger {
+    // Step 4: Implement the AsteriskLogger methods
+    @Override
+    public void log(String message) {
+        System.out.println("***" + message + "***");
+    }
+
+    @Override
+    public void error(String errorMessage) {
+        System.out.println("****************");
+        System.out.println("***Error: " + errorMessage + "***");
+        System.out.println("*************");
+    }
+}
+
+// Class implementing SpacedLogger
+class SpacedLogger implements Logger {
+    // Step 5: Implement the SpacedLogger methods
+    @Override
+    public void log(String message) {
+        for (int i = 0; i < message.length(); i++) {
+            System.out.print(message.charAt(i) + " ");
+        }
+        System.out.println();
+    }
+
+    @Override
+    public void error(String errorMessage) {
+        System.out.print("ERROR: ");
+        for (int i = 0; i < errorMessage.length(); i++) {
+            System.out.print(errorMessage.charAt(i) + " ");
+        }
+        System.out.println();
+    }
+}
+
+// Main class
+public class assignment05 {
+    public static void main(String[] args) {
+        // Instantiate an instance of each logger class
+        Logger asteriskLogger = new AsteriskLogger();
+        Logger spacedLogger = new SpacedLogger();
+
+        // Test log and error methods on both instances
+        System.out.println("Testing AsteriskLogger:");
+        asteriskLogger.log("Hello");
+        asteriskLogger.error("Hello");
+
+        System.out.println("\nTesting SpacedLogger:");
+        spacedLogger.log("Hello");
+        spacedLogger.error("Hello");
+    }
+}
