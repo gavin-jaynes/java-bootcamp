@@ -1,0 +1,176 @@
+package cardGame.App;
+
+// Card class
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+class Card {
+    private int value;
+    private String name;
+
+    // Constructor
+    public Card(int value, String name) {
+        this.value = value;
+        this.name = name;
+    }
+
+    // Getters and Setters
+    public int getValue() {
+        return value;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    // Describe method
+    public void describe() {
+        System.out.println(name);
+    }
+}
+
+// Deck class
+class Deck {
+    private List<Card> cards;
+
+    // Constructor
+    public Deck() {
+        cards = new ArrayList<>();
+        String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
+        for (String suit : suits) {
+            for (int value = 2; value <= 14; value++) {
+                String name = "";
+                if (value >= 2 && value <= 10) {
+                    name = value + " of " + suit;
+                } else if (value == 11) {
+                    name = "Jack of " + suit;
+                } else if (value == 12) {
+                    name = "Queen of " + suit;
+                } else if (value == 13) {
+                    name = "King of " + suit;
+                } else if (value == 14) {
+                    name = "Ace of " + suit;
+                }
+                cards.add(new Card(value, name));
+            }
+        }
+    }
+
+    // Shuffle method
+    public void shuffle() {
+        Collections.shuffle(cards);
+    }
+
+    // Draw method
+    public Card draw() {
+        return cards.remove(0);
+    }
+}
+
+// Player class
+class Player {
+    private List<Card> hand;
+    private int score;
+    private String name;
+
+    // Constructor
+    public Player(String name) {
+        this.name = name;
+        hand = new ArrayList<>();
+        score = 0;
+    }
+
+    // Describe method
+    public void describe() {
+        System.out.println(name + "'s hand:");
+        for (Card card : hand) {
+            card.describe();
+        }
+    }
+
+    // Flip method
+    public Card flip() {
+        return hand.remove(0);
+    }
+
+    // Draw method
+    public void draw(Deck deck) {
+        hand.add(deck.draw());
+    }
+
+    // Increment score method
+    public void incrementScore() {
+        score++;
+    }
+
+    // Getters
+    public int getScore() {
+        return score;
+    }
+}
+
+// App class
+public class MainMan {
+    public static void main(String[] args) {
+        // Instantiate a Deck and two Players
+        Deck deck = new Deck();
+        Player player1 = new Player("Player 1");
+        Player player2 = new Player("Player 2");
+
+        // Shuffle the deck
+        deck.shuffle();
+
+        // Distribute cards to players
+        for (int i = 0; i < 52; i++) {
+            if (i % 2 == 0) {
+                player1.draw(deck);
+            } else {
+                player2.draw(deck);
+            }
+        }
+
+        // Compare and update scores
+        for (int i = 0; i < 26; i++) {
+            Card card1 = player1.flip();
+            Card card2 = player2.flip();
+
+            // Describe cards
+            System.out.println("Player 1's card: ");
+            card1.describe();
+            System.out.println("Player 2's card: ");
+            card2.describe();
+
+            // Compare card values
+            if (card1.getValue() > card2.getValue()) {
+                player1.incrementScore();
+                System.out.println("Player 1 receives a point.");
+            } else if (card1.getValue() < card2.getValue()) {
+                player2.incrementScore();
+                System.out.println("Player 2 receives a point.");
+            } else {
+                System.out.println("It's a tie. No point awarded.");
+            }
+        }
+
+        // Determine the winner
+        int score1 = player1.getScore();
+        int score2 = player2.getScore();
+
+        // Print final scores and winner
+
+
+System.out.println("Final score:");
+        System.out.println("Player 1: " + score1);
+        System.out.println("Player 2: " + score2);
+
+        if (score1 > score2) {
+            System.out.println("Player 1 wins!");
+        } else if (score1 < score2) {
+            System.out.println("Player 2 wins!");
+        } else {
+            System.out.println("It's a draw!");
+        }
+    }
+}
