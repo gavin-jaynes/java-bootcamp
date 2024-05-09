@@ -1,0 +1,128 @@
+public class assignmentWeek04 {
+
+    public static void main(String[] args) {
+        // 1. Coding Steps
+
+        // Step 1.a
+        int[] ages = {3, 9, 23, 64, 2, 8, 28, 93};
+        int resultA = ages[ages.length - 1] - ages[0];
+        System.out.println("Result of subtraction for Step 1.a: " + resultA);
+
+        // Step 1.b
+        int[] ages2 = new int[9];
+        System.arraycopy(ages, 0, ages2, 0, ages.length);
+        int resultB = ages2[ages2.length - 1] - ages2[0];
+        System.out.println("Result of subtraction for Step 1.b: " + resultB);
+
+        // Step 1.c
+        double sum = 0;
+        for (int age : ages) {
+            sum += age;
+        }
+        double averageAge = sum / ages.length;
+        System.out.println("Average age: " + averageAge);
+
+        // Step 2
+        String[] names = {"Sam", "Tommy", "Tim", "Sally", "Buck", "Bob"};
+
+        // Step 2.a
+        double totalLetters = 0;
+        for (String name : names) {
+            totalLetters += name.length();
+        }
+        double averageLetters = totalLetters / names.length;
+        System.out.println("Average number of letters per name: " + averageLetters);
+
+        // Step 2.b
+        StringBuilder concatenatedNames = new StringBuilder();
+        for (String name : names) {
+            concatenatedNames.append(name).append(" ");
+        }
+        System.out.println("Concatenated names: " + concatenatedNames.toString().trim());
+
+        // Step 3
+        // To access the last element of any array, you can use array[array.length - 1].
+
+        // Step 4
+        // To access the first element of any array, you can use array[0].
+
+        // Step 5
+        int[] nameLengths = new int[names.length];
+        for (int i = 0; i < names.length; i++) {
+            nameLengths[i] = names[i].length();
+        }
+
+        // Step 6
+        double sumOfNameLengths = 0;
+        for (int length : nameLengths) {
+            sumOfNameLengths += length;
+        }
+        System.out.println("Sum of name lengths: " + sumOfNameLengths);
+
+        // Step 7
+        System.out.println(concatenateWord("Hello", 3));
+
+        // Step 8
+        System.out.println(fullName("John", "Doe"));
+
+        // Step 9
+        System.out.println(isSumGreaterThan100(ages));
+
+        // Step 10
+        double[] doublesArray = {1.5, 2.3, 4.6, 5.1, 2.9};
+        System.out.println(calculateAverage(doublesArray));
+
+        // Step 11
+        double[] firstArray = {1.5, 2.3, 4.6, 5.1, 2.9};
+        double[] secondArray = {3.2, 2.1, 6.5, 4.8, 1.9};
+        System.out.println(isFirstArrayAvgGreaterThanSecond(firstArray, secondArray));
+
+        // Step 12
+        System.out.println(willBuyDrink(true, 12.75));
+
+        // Step 13
+        // I created a method called reverseString to reverse a given string.
+        // This could be useful in scenarios like when dealing with palindromes or text manipulation.
+        System.out.println(reverseString("Hello"));
+    }
+
+    public static String concatenateWord(String word, int n) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            result.append(word);
+        }
+        return result.toString();
+    }
+
+    public static String fullName(String firstName, String lastName) {
+        return firstName + " " + lastName;
+    }
+
+    public static boolean isSumGreaterThan100(int[] array) {
+        int sum = 0;
+        for (int num : array) {
+            sum += num;
+        }
+        return sum > 100;
+    }
+
+    public static double calculateAverage(double[] array) {
+        double sum = 0;
+        for (double num : array) {
+            sum += num;
+        }
+        return sum / array.length;
+    }
+
+    public static boolean isFirstArrayAvgGreaterThanSecond(double[] firstArray, double[] secondArray) {
+        return calculateAverage(firstArray) > calculateAverage(secondArray);
+    }
+
+    public static boolean willBuyDrink(boolean isHotOutside, double moneyInPocket) {
+        return isHotOutside && moneyInPocket > 10.50;
+    }
+
+    public static String reverseString(String str) {
+        return new StringBuilder(str).reverse().toString();
+    }
+}
